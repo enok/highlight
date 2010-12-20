@@ -2,8 +2,11 @@ package br.com.highligth.controllers;
 
 import java.util.List;
 
-import br.com.highligth.models.Codeshare;
-import br.com.highligth.repositories.CodeshareRepository;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.util.StringUtils;
+
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
@@ -12,6 +15,8 @@ import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
+import br.com.highligth.models.Codeshare;
+import br.com.highligth.repositories.CodeshareRepository;
 
 @Resource
 public class CodeshareController {
@@ -30,6 +35,33 @@ public class CodeshareController {
 	@Path("/codeshares")
 	public List<Codeshare> index() {
 		return repository.findAll();
+	}
+	
+	@Get
+	@Path("/codeshares/{codeshare.id}/find")
+	public void find(Codeshare codeshare) {
+		
+		Criteria crit = repository.session().createCriteria(Codeshare.class);
+		
+		String name = codeshare.getName();
+		if (StringUtils.hasLength(name)) {
+			crit.add(Restrictions.eq("name", name));
+		}
+		
+		String language = codeshare.getLanguage();
+		if (StringUtils.hasLength(language)) {
+			crit.add(Restrictions.eq("language", language));
+		}
+		
+		String tags = codeshare.getLanguage();
+		if (StringUtils.hasLength(tags)) {
+			crit.add(Restrictions.eq("tags", tags));
+		}
+		
+		crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		crit.addOrder(Order.asc("name"));
+		
+		result.include("findList", crit.list());
 	}
 	
 	@Post

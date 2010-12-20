@@ -1,8 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <body>
-<h1>Listing Codeshares</h1>
-
-<table>
+	<%@include file="form.jsp"%>
+	<table>
 	<tr>
 		<th>name</th>
 		<th>code</th>
@@ -13,7 +11,7 @@
 		<th></th>
 	</tr>
 
-	<c:forEach items="${codeshareList}" var="codeshare">
+	<c:forEach items="${findList}" var="codeshare">
 		<tr>
 			<td>${codeshare.name}</td>
 			<td>${codeshare.code}</td>
@@ -31,9 +29,4 @@
 		</tr>
 	</c:forEach>
 </table>
-
-<br />
-<a href="<c:url value="/codeshares/new"/>">New Codeshare</a>
-<br />
-<a href="<c:url value="/codeshares/${codeshare.id}/find"/>">Find Codeshare</a>
 </body>
