@@ -84,7 +84,7 @@ vraptor scaffold codeshare name:string tags:string language:string code:text
 </web-app>
 
 
-#-------------------- POM.XML --------------------#	
+#-------------------- POM.XML --------------------#
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -278,3 +278,29 @@ vraptor scaffold codeshare name:string tags:string language:string code:text
 		</plugins>
 	</reporting>
 </project>
+
+
+#-------------------- PERSISTENCE.XML --------------------#
+
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+
+	<persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		
+		<class>br.com.highligth.models.Codeshare</class>
+		
+		<properties>
+			<property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" />
+			<property name="hibernate.connection.url" value="jdbc:hsqldb:file:tmp/devdb" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.query.substitutions" value="true=1, false=0"/>
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+		</properties>
+	</persistence-unit>
+
+</persistence>
