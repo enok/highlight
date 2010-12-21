@@ -54,7 +54,7 @@ public class CodeshareController {
 			crit.add(Restrictions.eq("language", language));
 		}
 		
-		String tags = codeshare.getLanguage();
+		String tags = codeshare.getTags();
 		if (StringUtils.hasLength(tags)) {
 			crit.add(Restrictions.eq("tags", tags));
 		}
