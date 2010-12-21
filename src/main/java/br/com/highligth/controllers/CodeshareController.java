@@ -37,9 +37,10 @@ public class CodeshareController {
 		return repository.findAll();
 	}
 	
-	@Get
-	@Path("/codeshares/{codeshare.id}/find")
-	public void find(Codeshare codeshare) {
+	@Post
+	@Path("/codeshares/find")
+	@SuppressWarnings("unchecked")
+	public List<Codeshare> find(Codeshare codeshare) {
 		
 		Criteria crit = repository.session().createCriteria(Codeshare.class);
 		
@@ -61,7 +62,9 @@ public class CodeshareController {
 		crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		crit.addOrder(Order.asc("name"));
 		
-		result.include("findList", crit.list());
+		List<Codeshare> list = crit.list();
+		
+		return list;
 	}
 	
 	@Post

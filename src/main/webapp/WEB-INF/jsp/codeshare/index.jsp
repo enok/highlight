@@ -1,5 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <body>
+
+
+<h1>Pesquisar</h1>
+<%@include file="formSearch.jsp"%>
+
+<br>
+<br>
+
 <h1>Listing Codeshares</h1>
 
 <table>
@@ -35,5 +43,4 @@
 <br />
 <a href="<c:url value="/codeshares/new"/>">New Codeshare</a>
 <br />
-<a href="<c:url value="/codeshares/${codeshare.id}/find"/>">Find Codeshare</a>
 </body>

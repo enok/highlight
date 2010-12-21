@@ -1,6 +1,13 @@
-<body>
-	<%@include file="form.jsp"%>
-	<table>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:if test="${not empty errors}">
+	<c:forEach items="${errors}" var="error">
+		 ${error.category} - ${error.message}<br />
+	</c:forEach>
+</c:if>
+
+<h1>Resultado da Pesquisa</h1>
+
+<table>
 	<tr>
 		<th>name</th>
 		<th>code</th>
@@ -11,7 +18,7 @@
 		<th></th>
 	</tr>
 
-	<c:forEach items="${findList}" var="codeshare">
+	<c:forEach items="${codeshareList}" var="codeshare">
 		<tr>
 			<td>${codeshare.name}</td>
 			<td>${codeshare.code}</td>
@@ -29,4 +36,7 @@
 		</tr>
 	</c:forEach>
 </table>
-</body>
+
+ <!--  alterado fim  -->
+<a href="<c:url value="/codeshares"/>">Back</a>
+
